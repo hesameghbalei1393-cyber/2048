@@ -1,0 +1,53 @@
+name: Build signed release APK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Configure release signing
+        env:
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+        run: |
+          test -n "$SIGNING_PASSWORD" || (echo "Missing SIGNING_PASSWORD repository secret" && exit 1)
+          mkdir -p android/app
+          keytool -genkeypair -v \
+            -keystore android/app/release-keystore.jks \
+            -storepass "$SIGNING_PASSWORD" \
+            -keypass "$SIGNING_PASSWORD" \
+            -alias mergemint2048 \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=Eight8 Studio, OU=Apps, O=Eight8 Studio, L=Unknown, ST=Unknown, C=US"
+          cat > android/key.properties <<EOF
+          storePassword=$SIGNING_PASSWORD
+          keyPassword=$SIGNING_PASSWORD
+          keyAlias=mergemint2048
+          storeFile=app/release-keystore.jks
+          EOF
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Build signed release APK
+        run: flutter build apk --release
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MergeMint-2048-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
