@@ -1,19 +1,13 @@
-<<<<<<< HEAD
-plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-=======
 
 plugins {
     id "com.android.application"
     id "kotlin-android"
->>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
     id "dev.flutter.flutter-gradle-plugin"
 }
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
+
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader("UTF-8") { reader ->
         localProperties.load(reader)
@@ -32,6 +26,7 @@ if (flutterVersionName == null) {
 
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file("key.properties")
+
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
@@ -51,14 +46,7 @@ android {
     }
 
     defaultConfig {
-<<<<<<< HEAD
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "studio.eight8.mergemint2048"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-=======
-        applicationId = "studio.eight8.mergemint2048"
->>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
@@ -79,14 +67,11 @@ android {
     buildTypes {
         release {
             if (!keystorePropertiesFile.exists()) {
-<<<<<<< HEAD
-                throw new GradleException("Release signing is required. Configure key.properties and your release keystore.")
-=======
                 throw new GradleException(
                     "Release signing is required. Configure key.properties and your release keystore."
                 )
->>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
             }
+
             signingConfig = signingConfigs.release
             minifyEnabled = false
             shrinkResources = false
