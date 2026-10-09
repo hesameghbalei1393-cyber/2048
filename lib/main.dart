@@ -201,12 +201,48 @@ class _GamePageState extends State<GamePage> {
             onVerticalDragEnd: (details) { final v = details.primaryVelocity ?? 0; if (v.abs() > 80) _move(v < 0 ? 'up' : 'down'); },
             onHorizontalDragEnd: (details) { final v = details.primaryVelocity ?? 0; if (v.abs() > 80) _move(v < 0 ? 'left' : 'right'); },
             child: Container(width: boardWidth, height: boardWidth, padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: const Color(0xffbbada0), borderRadius: BorderRadius.circular(10)),
-              child: Column(children: List.generate(size, (r) => Expanded(child: Row(children: List.generate(size, (c) {
-                final value = _grid[r][c];
-                return Expanded(child: Container(margin: const EdgeInsets.all(4), decoration: BoxDecoration(color: _tileColor(value), borderRadius: BorderRadius.circular(6)), alignment: Alignment.center,
-                  child: value == 0 ? const SizedBox.shrink() : FittedBox(fit: BoxFit.scaleDown, child: Padding(padding: const EdgeInsets.all(2), child: Text('$value', style: TextStyle(fontSize: value >= 1024 ? 24 : value >= 128 ? 28 : 34, fontWeight: FontWeight.w900, color: _textColor(value))))),
-                );
-              }))))),
+              child: Column(
+                children: List.generate(
+                  size,
+                  (r) => Expanded(
+                    child: Row(
+                      children: List.generate(size, (c) {
+                        final value = _grid[r][c];
+                        return Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: _tileColor(value),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            alignment: Alignment.center,
+                            child: value == 0
+                                ? const SizedBox.shrink()
+                                : FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2),
+                                      child: Text(
+                                        '$value',
+                                        style: TextStyle(
+                                          fontSize: value >= 1024
+                                              ? 24
+                                              : value >= 128
+                                                  ? 28
+                                                  : 34,
+                                          fontWeight: FontWeight.w900,
+                                          color: _textColor(value),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 20),
