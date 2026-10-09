@@ -67,9 +67,9 @@ static const Duration moveDuration = Duration(milliseconds: 190);
 
 final Random _random = Random();
 
-List<List<Tile?>> grid = List.generate(
-size,
-() => List<Tile?>.filled(size, null),
+List<List<Tile?>> _grid = List.generate(
+  size,
+  (_) => List<Tile?>.filled(size, null),
 );
 
 List<List<Tile?>>? _previousGrid;
@@ -99,9 +99,9 @@ return source.map((row) => List<Tile?>.from(row)).toList();
 }
 
 void _newGame() {
-grid = List.generate(
-size,
-() => List<Tile?>.filled(size, null),
+_grid = List.generate(
+  size,
+  (_) => List<Tile?>.filled(size, null),
 );
 
 _score = 0;
