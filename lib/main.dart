@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+<<<<<<< HEAD
 import 'package:url_launcher/url_launcher.dart';
 
 import 'models/board_adapter.dart';
@@ -93,4 +94,28 @@ class _HomeScreenState extends State<HomeScreen> {
       const SizedBox(height: 4), TextButton(onPressed: about, child: Text(isPersian ? 'درباره برنامه' : 'About', style: const TextStyle(color: textColor))),
     ]))),
   );
+=======
+
+import 'models/board_adapter.dart';
+
+import 'game.dart';
+
+void main() async {
+  //Allow only portrait mode on Android & iOS
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
+  //Make sure Hive is initialized first and only after register the adapter.
+  await Hive.initFlutter();
+  Hive.registerAdapter(BoardAdapter());
+  runApp(const ProviderScope(
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      
+      title: 'MergeMint 2048',
+      home: Game(),
+    ),
+  ));
+>>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
 }

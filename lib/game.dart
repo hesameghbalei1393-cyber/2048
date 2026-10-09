@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
+<<<<<<< HEAD
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'preferences.dart';
+=======
+>>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
 
 import 'components/button.dart';
 import 'components/empty_board.dart';
@@ -13,6 +16,32 @@ import 'components/tile_board.dart';
 import 'const/colors.dart';
 import 'managers/board.dart';
 
+<<<<<<< HEAD
+=======
+class _AboutAppIcon extends StatelessWidget {
+  const _AboutAppIcon();
+
+  @override
+  Widget build(BuildContext context) => Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: const Color(0xff8f7a66),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        alignment: Alignment.center,
+        child: const Text(
+          '2048',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontSize: 15,
+          ),
+        ),
+      );
+}
+
+>>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
 class Game extends ConsumerStatefulWidget {
   const Game({super.key});
 
@@ -95,6 +124,7 @@ class Controller extends ConsumerState<Game>
                   fontSize: 34.0),
             ),
             backgroundColor: backgroundColor,
+<<<<<<< HEAD
             leading: IconButton(
               tooltip: isPersian ? 'بازگشت' : 'Back',
               icon: const Icon(Icons.arrow_back, color: textColor),
@@ -129,6 +159,34 @@ class Controller extends ConsumerState<Game>
                   ]),
                   actions: [TextButton(onPressed: () => Navigator.pop(dialogContext), child: Text(isPersian ? 'بستن' : 'Close'))],
                 )),
+=======
+            actions: [
+              IconButton(
+                tooltip: 'About',
+                icon: const Icon(Icons.info_outline, color: textColor),
+                onPressed: () {
+                  showAboutDialog(
+                    context: context,
+                    applicationName: 'MergeMint 2048',
+                    applicationVersion: '1.0.0',
+                    applicationIcon: const _AboutAppIcon(),
+                    applicationLegalese: '© 2026 Eight⁸ Studio',
+                    children: const [
+                      SizedBox(height: 8),
+                      Text(
+                        'MergeMint 2048 is a number puzzle game inspired by the classic 2048 gameplay. Swipe to move tiles, merge matching numbers, and challenge yourself to reach 2048.',
+                        textAlign: TextAlign.start,
+                      ),
+                      SizedBox(height: 12),
+                      Text('Created with care by Eight⁸ Studio.'),
+                      SizedBox(height: 8),
+                      Text('Rubika: @Studio_Eight8'),
+                      Text('Developer: @Hesam23799'),
+                      Text('Privacy: the game stores gameplay data locally on your device and does not send it to a server.'),
+                    ],
+                  );
+                },
+>>>>>>> 5a2e75ccc159512ba54ab5c94eecfbc71b73ab78
               ),
             ],
           ),
